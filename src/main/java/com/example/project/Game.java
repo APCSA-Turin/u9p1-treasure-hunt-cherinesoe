@@ -11,6 +11,7 @@ public class Game{
     private String difficulty;
 
     public Game(String difficulty){ //the constructor should call initialize() and play()
+        // changes size and amount of enemies/treasure based on difficulty
         if (difficulty.equals("easy")) {
             this.size = 5;
             enemies = new Enemy[1];
@@ -56,7 +57,7 @@ public class Game{
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            // clearScreen(); // Clear the screen at the beggining of the while loop
+            clearScreen(); // Clear the screen at the beggining of the while loop
             grid.display();
             System.out.println("Coordinates: " + player.getCoords());
             System.out.println("Treasure Count: " + player.getTreasureCount());
@@ -66,6 +67,7 @@ public class Game{
             if (input.equals("q")) {
                 playing = false;
             } else if (player.isValid(size, input)) { // makes sure position does not exceed grid
+                // only interacts when moving to a position where there is not a dot
                 if (input.equals("w")) {
                     if (!(grid.getGrid()[size - 2 - player.getY()][player.getX()] instanceof Dot)) {
                         interacting = grid.getGrid()[size - 2 - player.getY()][player.getX()];
@@ -95,6 +97,7 @@ public class Game{
             }
         }
 
+        // checks conditions for winning and losing
         if (player.getLives() > 0 && treasures.length == player.getTreasureCount()) {
             grid.win();
         } else {
@@ -107,6 +110,7 @@ public class Game{
         grid = new Grid(size);
         player = new Player(0, 0);
         grid.placeSprite(player);
+        // initializes variables based on difficulty
         if (difficulty.equals("easy")) {
             Enemy e1 = new Enemy(3, 2);
             enemies[0] = e1;

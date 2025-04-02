@@ -9,6 +9,7 @@ public class Grid{
     public Grid(int size) { //initialize and create a grid with all DOT objects
         this.size = size;
         this.grid = new Sprite[size][size];
+        // initializes grid with dot in every index
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
                 grid[i][j] = new Dot(j,size - 1 - i);
@@ -29,12 +30,8 @@ public class Grid{
     }
 
     public void placeSprite(Sprite s, String direction) { //place sprite in a new spot based on direction
-        // // fills current position with dot
-        // grid[size - 1 - s.getY()][s.getX()] = new Dot(s.getX(), s.getY());
-        // s.move(direction);
-        // // fills current position after moving with given sprite
-        // grid[size - 1 - s.getY()][s.getX()] = s;
         Dot d = new Dot(s.getX(), s.getY()) ;
+        // places a dot object in position player was in before being moved
         if (direction.equals("w")) {
             d = new Dot(s.getX(), s.getY() - 1);
         } else if (direction.equals("a")) {

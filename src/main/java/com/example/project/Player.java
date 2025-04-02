@@ -48,6 +48,8 @@ public class Player extends Sprite{
         boolean trophyFound = false;
         if (direction.equals("w")) {
             if (obj instanceof Treasure) {
+                // if the player is attempting to take the trophy without all the treasures, will not allow the player to move onto the trophy
+                // goes opposite direction of direction went
                 if (obj instanceof Trophy && treasureCount < numTreasures) {
                     move("s");
                 } else if (obj instanceof Trophy && treasureCount == numTreasures) {
@@ -55,6 +57,7 @@ public class Player extends Sprite{
                 } else {
                     treasureCount++;
                 }
+            // removes life from total number of lives if player interacts with enemy
             } else if (obj instanceof Enemy) {
                 numLives--;
             }
@@ -95,6 +98,7 @@ public class Player extends Sprite{
                 numLives--;
             }
         }
+        // changes whether player has won or not based on current condition
         if ((treasureCount == numTreasures) && trophyFound && (numLives > 0)) {
             win = true;
         } else {
